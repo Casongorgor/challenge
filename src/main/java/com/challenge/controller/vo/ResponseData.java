@@ -1,4 +1,4 @@
-package com.topexcel.marketing.controller.vo;
+package com.challenge.controller.vo;
 
 /**
  * Created by Cason

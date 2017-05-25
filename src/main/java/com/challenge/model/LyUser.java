@@ -1,4 +1,4 @@
-package com.topexcel.marketing.model;
+package com.challenge.model;
 
 import java.util.Date;
 

@@ -1,4 +1,4 @@
-package com.topexcel.marketing.utils;
+package com.challenge.utils;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

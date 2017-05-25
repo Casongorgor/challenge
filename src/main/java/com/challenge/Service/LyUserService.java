@@ -1,7 +1,7 @@
-package com.topexcel.marketing.Service;
+package com.challenge.Service;
 
-import com.topexcel.marketing.mapper.LyUserMapper;
-import com.topexcel.marketing.model.LyUser;
+import com.challenge.mapper.LyUserMapper;
+import com.challenge.model.LyUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

@@ -1,8 +1,8 @@
-package com.topexcel.marketing.controller;
+package com.challenge.controller;
 
-import com.topexcel.marketing.Service.LyUserService;
-import com.topexcel.marketing.config.SettingsRetriever;
-import com.topexcel.marketing.model.LyUser;
+import com.challenge.Service.LyUserService;
+import com.challenge.config.SettingsRetriever;
+import com.challenge.model.LyUser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

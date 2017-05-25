@@ -2,15 +2,17 @@
 <configuration>
     <!-- 如果不include，就只会在文件输出log，控制台不打印 -->
     <include resource="org/springframework/boot/logging/logback/base.xml"/>
-    <!--<Logger name="org.apache.catalina.util.LifecycleBase" level="error" />-->
-    <!--<Logger name="org.apache.coyote.http11.Http11NioProtocol" level="warn" />-->
-    <!--<Logger name="org.apache.tomcat.util.net.NioSelectorPool" level="warn" />-->
-    <!--<Logger name="org.hibernate.validator.internal.util.Version" level="warn" />-->
-    <!--<Logger name="org.springframework" level="warn" />-->
+    <Logger name="org.apache.catalina.util.LifecycleBase" level="error" />
+    <Logger name="org.apache.coyote.http11.Http11NioProtocol" level="warn" />
+    <Logger name="org.apache.tomcat.util.net.NioSelectorPool" level="warn" />
+    <Logger name="org.hibernate.validator.internal.util.Version" level="warn" />
+    <Logger name="o.a.c.loader" level="warn" />
+    <Logger name="org.apache.tomcat.util" level="warn" />
+    <Logger name="org.springframework" level="warn" />
     <!--<Property name="log.base" value="d:/logs/"/>-->
     <!--<property resource="application.properties" />-->
     <Property name="log.base" value="/data/logs/"/>
-    <Property name="log.name" value="topexcel-marketing" />
+    <Property name="log.name" value="challenge" />
     <Property name="patternTemplate" value="[%-5level] [%contextName] %d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] [%X{req.remoteHost}] [%X{req.requestURI}] [%X{traceId}] %logger - %msg%n" />
 
 
@@ -49,5 +51,5 @@
         <appender-ref ref="ASYNC" />
     </root>
 
-    <Logger name="com.topexcel.marketing" level="debug" />
+    <Logger name="com.challenge" level="debug" />
 </configuration>

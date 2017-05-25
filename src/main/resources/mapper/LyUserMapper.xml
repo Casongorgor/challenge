@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.topexcel.marketing.mapper.LyUserMapper" >
-  <resultMap id="BaseResultMap" type="com.topexcel.marketing.model.LyUser" >
+<mapper namespace="com.challenge.mapper.LyUserMapper" >
+  <resultMap id="BaseResultMap" type="com.challenge.model.LyUser" >
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="userName" property="username" jdbcType="VARCHAR" />
     <result column="accountName" property="accountname" jdbcType="VARCHAR" />
@@ -26,7 +26,7 @@
     delete from ly_user
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.topexcel.marketing.model.LyUser" >
+  <insert id="insert" parameterType="com.challenge.model.LyUser" >
     insert into ly_user (id, userName, accountName, 
       password, credentialsSalt, description, 
       locked, createTime, deletestatus
@@ -36,7 +36,7 @@
       #{locked,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}, #{deletestatus,jdbcType=INTEGER}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.topexcel.marketing.model.LyUser" >
+  <insert id="insertSelective" parameterType="com.challenge.model.LyUser" >
     insert into ly_user
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -97,7 +97,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.topexcel.marketing.model.LyUser" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.challenge.model.LyUser" >
     update ly_user
     <set >
       <if test="username != null" >
@@ -127,7 +127,7 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.topexcel.marketing.model.LyUser" >
+  <update id="updateByPrimaryKey" parameterType="com.challenge.model.LyUser" >
     update ly_user
     set userName = #{username,jdbcType=VARCHAR},
       accountName = #{accountname,jdbcType=VARCHAR},

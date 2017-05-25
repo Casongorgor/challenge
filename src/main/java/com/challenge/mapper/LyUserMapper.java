@@ -1,7 +1,7 @@
-package com.topexcel.marketing.mapper;
+package com.challenge.mapper;
 
 
-import com.topexcel.marketing.model.LyUser;
+import com.challenge.model.LyUser;
 import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
