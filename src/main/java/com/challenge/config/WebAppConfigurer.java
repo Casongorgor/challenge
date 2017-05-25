@@ -1,5 +1,6 @@
 package com.challenge.config;
 
+import com.challenge.common.HeaderCons;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
@@ -17,6 +18,7 @@ public class WebAppConfigurer extends WebMvcConfigurerAdapter {
                 .allowedOrigins("*")//这里填写你允许进行跨域的主机ip
                 .allowCredentials(true)
                 .allowedMethods("GET", "POST", "DELETE", "PUT")//允许的访问方法
+                .allowedHeaders(HeaderCons.ACCESS_TOKEN, HeaderCons.MOBILE)//允许Header的参数
                 .maxAge(3600);//Access-Control-Max-Age 用于 CORS 相关配置的缓存
     }
 

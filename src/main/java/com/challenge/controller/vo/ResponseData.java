@@ -6,6 +6,7 @@ package com.challenge.controller.vo;
 public class ResponseData {
     private String code;//状态码
     private String info;//描述
+    private Object data;//内容
 
     public String getCode() {
         return code;
@@ -33,10 +34,19 @@ public class ResponseData {
         this.info = info;
     }
 
+    public ResponseData(Object data) {
+        this("200","成功");
+        this.data=data;
+    }
+
     public static ResponseData checkError(String info){return new ResponseData("-1001",info);}
 
     public static ResponseData getSuccess(){
-        return new ResponseData("0","成功");
+        return new ResponseData("200","成功");
+    }
+
+    public static ResponseData getSuccess(Object data){
+        return new ResponseData(data);
     }
 
     @Override
@@ -44,6 +54,7 @@ public class ResponseData {
         return "ResponseData{" +
                 "code='" + code + '\'' +
                 ", info='" + info + '\'' +
+                ", data=" + data +
                 '}';
     }
 }

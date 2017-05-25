@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.challenge.mapper.VoteRecordMapper">
+    <resultMap id="BaseResultMap" type="com.challenge.model.VoteRecord">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="mobile" property="mobile" jdbcType="VARCHAR"/>
+        <result column="vote_result" property="voteResult" jdbcType="VARCHAR"/>
+        <result column="vote_group" property="voteGroup" jdbcType="VARCHAR"/>
+        <result column="vote_date" property="voteDate" jdbcType="TIMESTAMP"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, mobile, vote_result, vote_group, vote_date
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from vote_record
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from vote_record
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+    <insert id="insert" parameterType="com.challenge.model.VoteRecord">
+    insert into vote_record (id, mobile, vote_result, 
+      vote_group, vote_date)
+    values (#{id,jdbcType=INTEGER}, #{mobile,jdbcType=VARCHAR}, #{voteResult,jdbcType=VARCHAR}, 
+      #{voteGroup,jdbcType=VARCHAR}, #{voteDate,jdbcType=TIMESTAMP})
+  </insert>
+    <insert id="insertSelective" parameterType="com.challenge.model.VoteRecord">
+        insert into vote_record
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="mobile != null">
+                mobile,
+            </if>
+            <if test="voteResult != null">
+                vote_result,
+            </if>
+            <if test="voteGroup != null">
+                vote_group,
+            </if>
+            <if test="voteDate != null">
+                vote_date,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="mobile != null">
+                #{mobile,jdbcType=VARCHAR},
+            </if>
+            <if test="voteResult != null">
+                #{voteResult,jdbcType=VARCHAR},
+            </if>
+            <if test="voteGroup != null">
+                #{voteGroup,jdbcType=VARCHAR},
+            </if>
+            <if test="voteDate != null">
+                #{voteDate,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.challenge.model.VoteRecord">
+        update vote_record
+        <set>
+            <if test="mobile != null">
+                mobile = #{mobile,jdbcType=VARCHAR},
+            </if>
+            <if test="voteResult != null">
+                vote_result = #{voteResult,jdbcType=VARCHAR},
+            </if>
+            <if test="voteGroup != null">
+                vote_group = #{voteGroup,jdbcType=VARCHAR},
+            </if>
+            <if test="voteDate != null">
+                vote_date = #{voteDate,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.challenge.model.VoteRecord">
+    update vote_record
+    set mobile = #{mobile,jdbcType=VARCHAR},
+      vote_result = #{voteResult,jdbcType=VARCHAR},
+      vote_group = #{voteGroup,jdbcType=VARCHAR},
+      vote_date = #{voteDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+
+    <select id="countVoteRecCurrentDate" resultType="java.lang.Integer">
+    select
+    count(1)
+    from vote_record
+    where mobile = #{mobile,jdbcType=VARCHAR}
+    and vote_date = CURRENT_DATE
+  </select>
+
+    <select id="listVoteResultByVoteGroup" resultType="java.util.Map">
+    SELECT
+	count(1) AS con,
+	vote_result AS voteResult
+FROM
+	vote_record
+where vote_group = #{voteGroup,jdbcType=VARCHAR}
+GROUP BY
+	vote_result
+ORDER BY
+	con DESC
+
+  </select>
+
+
+</mapper>

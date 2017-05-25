@@ -1,42 +1,77 @@
 package com.challenge.controller;
 
-import com.challenge.Service.LyUserService;
-import com.challenge.config.SettingsRetriever;
-import com.challenge.model.LyUser;
+import com.challenge.Service.UsersService;
+import com.challenge.common.HeaderCons;
+import com.challenge.controller.vo.ResponseData;
+import com.challenge.model.VoteRecord;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-
-import java.util.Date;
-import java.util.Map;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * Created by jingle.huang on 2017/3/9.
  */
-@Controller
+@RestController
 public class IndexController {
     private final Logger log = LoggerFactory.getLogger(IndexController.class);
 
-    @Autowired
-    SettingsRetriever settingsRetriever;
-
 
     @Autowired
-    LyUserService lyUserService;
+    UsersService usersService;
 
 
-    @RequestMapping("/")
-    public String web(Map<String,Object> model){
-        LyUser fi=lyUserService.selectByPrimaryKey(1);
-        model.put("time",new Date());
-        model.put("message",settingsRetriever.getMessage());
-        model.put("name",fi.getAccountname());
-        System.out.println("model = [" + model + "]");
-        return "web";//返回的内容就是templetes下面文件的名称
+    /**
+     * 获取手机验证码
+     *
+     * @param mobile
+     * @return
+     */
+    @PostMapping(value = "/user/generateVcode")
+    public ResponseData generateVcode(String mobile) {
+        log.info("generateVcode-------------mobile:{}", mobile);
+
+        return usersService.generateVcode(mobile);
     }
 
+    /**
+     * 验证手机和验证码，获取token
+     *
+     * @param mobile
+     * @param vCode
+     * @return
+     */
+    @PostMapping(value = "/user/generateToken")
+    public ResponseData generateToken(String mobile, String vCode) {
+        log.info("generateToken-------------mobile:{}, vCode:{}", mobile, vCode);
+        return usersService.generateToken(mobile, vCode);
+    }
+
+    /**
+     * 提交投票信息，先经过token验证，再校验今天投票次数
+     * @param voteRecord
+     * @param token
+     * @return
+     */
+    @PostMapping(value = "/vote/submit")
+    public ResponseData voteSubmit(@RequestBody VoteRecord voteRecord, @RequestHeader(HeaderCons.ACCESS_TOKEN) String token) {
+        log.info("voteSubmit-------------voteRecord: {}, token:{}", voteRecord, token);
+        return usersService.voteSubmit(voteRecord, token);
+    }
+
+    /**
+     * 根据投票分组，获取投票排名列表
+     * @param voteGroup
+     * @return
+     */
+    @PostMapping(value = "/vote/listResult")
+    public ResponseData listResult(String voteGroup) {
+        log.info("listResult-------------voteGroup: {}",voteGroup);
+        return usersService.listResult(voteGroup);
+    }
 
 
 }
