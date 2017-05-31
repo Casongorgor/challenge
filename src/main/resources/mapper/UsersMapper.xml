@@ -115,7 +115,7 @@
     where id = #{id,jdbcType=INTEGER}
   </update>
 
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" >
+  <select id="selectByMobile" resultMap="BaseResultMap" >
     select
     <include refid="Base_Column_List" />
     from users
