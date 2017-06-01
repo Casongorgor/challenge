@@ -97,7 +97,7 @@
     count(1)
     from vote_record
     where mobile = #{mobile,jdbcType=VARCHAR}
-    and vote_date = CURRENT_DATE
+    and DATE(vote_date) = CURRENT_DATE
   </select>
 
     <select id="listVoteResultByVoteGroup" resultType="java.util.Map">
@@ -106,11 +106,15 @@
 	vote_result AS voteResult
 FROM
 	vote_record
-where vote_group = #{voteGroup,jdbcType=VARCHAR}
+        <if test="voteGroup != null">
+
+          where vote_group = #{voteGroup,jdbcType=VARCHAR}
+
+        </if>
 GROUP BY
 	vote_result
 ORDER BY
-	con DESC
+	con DESC, vote_result
 
   </select>
 

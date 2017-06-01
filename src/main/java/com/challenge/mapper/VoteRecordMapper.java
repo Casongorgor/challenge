@@ -2,6 +2,7 @@ package com.challenge.mapper;
 
 import com.challenge.model.VoteRecord;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 import java.util.Map;
@@ -22,5 +23,5 @@ public interface VoteRecordMapper {
 
     int countVoteRecCurrentDate (String mobile);
 
-    List<Map> listVoteResultByVoteGroup(String voteGroup);
+    List<Map> listVoteResultByVoteGroup(@Param("voteGroup")String voteGroup);
 }
