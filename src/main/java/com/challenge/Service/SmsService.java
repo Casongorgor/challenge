@@ -8,8 +8,6 @@ import com.aliyun.mns.model.BatchSmsAttributes;
 import com.aliyun.mns.model.MessageAttributes;
 import com.aliyun.mns.model.RawTopicMessage;
 import com.aliyun.mns.model.TopicMessage;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 /**
@@ -17,9 +15,8 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class SmsService {
-    private static final Logger log = LoggerFactory.getLogger(UsersService.class);
 
-    public void sendVcode(String mobile, String vCode){
+    public static void sendVcode(String mobile, String vCode){
         /**
          * Step 1. 获取主题引用
          */
@@ -55,8 +52,8 @@ public class SmsService {
              * Step 4. 发布SMS消息
              */
             TopicMessage ret = topic.publishMessage(msg, messageAttributes);
-            log.info("MessageId: " + ret.getMessageId());
-            log.info("MessageMD5: " + ret.getMessageBodyMD5());
+            System.out.println("MessageId: " + ret.getMessageId());
+            System.out.println("MessageMD5: " + ret.getMessageBodyMD5());
         } catch (ServiceException se) {
             se.printStackTrace();
         } catch (Exception e) {
@@ -65,5 +62,7 @@ public class SmsService {
         client.close();
     }
 
-
+    public static void main(String[] args) {
+        sendVcode("15975065431","8658");
+    }
 }
