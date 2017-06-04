@@ -27,6 +27,9 @@ public class UsersService {
     @Autowired
     private VoteRecordMapper voteRecordMapper;
 
+    @Autowired
+    private SmsService smsService;
+
     public ResponseData generateVcode(String mobile) {
 
         if (StringUtils.isEmpty(mobile) || !Pattern.matches("^1[34587]\\d{9}$", mobile)) {
@@ -37,7 +40,8 @@ public class UsersService {
         String vCode = generateCode();
 
 
-        //TODO 发送短信
+        // 发送短信
+        smsService.sendVcode(mobile, vCode);
 
         Users users = usersMapper.selectByMobile(mobile);
         if (users == null) {

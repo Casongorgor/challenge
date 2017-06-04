@@ -67,13 +67,19 @@
             <artifactId>logback-classic</artifactId>
             <version>1.1.7</version>
         </dependency>
-        <!-- end logback log文件输出 -->
 
         <dependency>
+            <groupId>com.aliyun.mns</groupId>
+            <artifactId>aliyun-sdk-mns</artifactId>
+            <version>1.1.8</version>
+        </dependency>
+        <!-- end logback log文件输出 -->
+
+        <!--<dependency>
             <groupId>jsch</groupId>
             <artifactId>jsch</artifactId>
             <version>0.1.31</version>
-        </dependency>
+        </dependency>-->
 
     </dependencies>
 
