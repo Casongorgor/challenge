@@ -59,10 +59,10 @@ public class UsersService {
         }
         log.info("generateVcode--------vCode:{}", vCode);
         Map<String, String> result = new HashMap<>();
-        result.put("vCode", vCode);
+        result.put("vCode", "");
         result.put("mobile", mobile);
 
-        return ResponseData.getSuccess(result);
+        return ResponseData.getSuccess();
 
     }
 
