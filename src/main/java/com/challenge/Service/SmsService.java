@@ -8,6 +8,8 @@ import com.aliyun.mns.model.BatchSmsAttributes;
 import com.aliyun.mns.model.MessageAttributes;
 import com.aliyun.mns.model.RawTopicMessage;
 import com.aliyun.mns.model.TopicMessage;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 /**
@@ -15,6 +17,8 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class SmsService {
+
+    private static final Logger log = LoggerFactory.getLogger(SmsService.class);
 
     public static void sendVcode(String mobile, String vCode){
         /**
@@ -38,11 +42,11 @@ public class SmsService {
         // 3.1 设置发送短信的签名（SMSSignName）
         batchSmsAttributes.setFreeSignName("中兴通讯");
         // 3.2 设置发送短信使用的模板（SMSTempateCode）
-        batchSmsAttributes.setTemplateCode("SMS_68210214");
+        batchSmsAttributes.setTemplateCode("SMS_70235177");
         // 3.3 设置发送短信所使用的模板中参数对应的值（在短信模板中定义的，没有可以不用设置）
         BatchSmsAttributes.SmsReceiverParams smsReceiverParams = new BatchSmsAttributes.SmsReceiverParams();
         smsReceiverParams.setParam("code", vCode);
-        smsReceiverParams.setParam("product", "中兴通讯");
+        //smsReceiverParams.setParam("product", "中兴通讯");
         // 3.4 增加接收短信的号码
 
         batchSmsAttributes.addSmsReceiver(mobile, smsReceiverParams);
@@ -52,8 +56,8 @@ public class SmsService {
              * Step 4. 发布SMS消息
              */
             TopicMessage ret = topic.publishMessage(msg, messageAttributes);
-            System.out.println("MessageId: " + ret.getMessageId());
-            System.out.println("MessageMD5: " + ret.getMessageBodyMD5());
+            log.info("MessageId: " + ret.getMessageId());
+            log.info("MessageMD5: " + ret.getMessageBodyMD5());
         } catch (ServiceException se) {
             se.printStackTrace();
         } catch (Exception e) {
@@ -62,7 +66,4 @@ public class SmsService {
         client.close();
     }
 
-    public static void main(String[] args) {
-        sendVcode("15975065431","8658");
-    }
 }
