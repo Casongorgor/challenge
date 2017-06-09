@@ -121,7 +121,8 @@ public class UsersService {
     }
 
     private String generateCode() {
-        return String.valueOf(getRandNum(1, 9999));
+        String code = String.valueOf(getRandNum(1, 9999));
+        return StringUtils.leftPad(code,4,"0");
     }
 
     private int getRandNum(int min, int max) {
@@ -133,5 +134,6 @@ public class UsersService {
     private String getUUID() {
         return UUID.randomUUID().toString().replaceAll("-", "");
     }
+
 
 }

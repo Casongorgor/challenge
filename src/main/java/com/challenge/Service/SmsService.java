@@ -42,7 +42,7 @@ public class SmsService {
         // 3.1 设置发送短信的签名（SMSSignName）
         batchSmsAttributes.setFreeSignName("中兴通讯");
         // 3.2 设置发送短信使用的模板（SMSTempateCode）
-        batchSmsAttributes.setTemplateCode("SMS_70235177");
+        batchSmsAttributes.setTemplateCode("SMS_70380259");
         // 3.3 设置发送短信所使用的模板中参数对应的值（在短信模板中定义的，没有可以不用设置）
         BatchSmsAttributes.SmsReceiverParams smsReceiverParams = new BatchSmsAttributes.SmsReceiverParams();
         smsReceiverParams.setParam("code", vCode);
@@ -65,5 +65,6 @@ public class SmsService {
         }
         client.close();
     }
+
 
 }
